@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} 
+Courses 
+{% endblock title %} {% block custom_css %}
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+<link href="{% static 'css/album.css' %}" rel="stylesheet" />
+{% endblock custom_css %} {% block content %}
+<main role="main">
+  <section
+    class="jumbotron text-center"
+  >
+    <div class="container">
+      <h1>{{course.title}}</h1>
+      <p class="lead text-muted course_detail_author">by {{course.author}}</p>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="card mb-4 shadow-sm">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe
+            class="embed-responsive-item" 
+            src="{{course.url}}" 
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen></iframe>
+        </div>
+      <div class="ml-3 mt-1 mb-0">{{video.title}}</div>
+      <div class="card-body">
+        <p class="card-text">{{video.description}}</p>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="btn-group">
+            <a type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
+          </div>
+          <small class="text-muted">added by {{course.added_by.first_name}}</small>
+        </div>
+      </div>
+    </div>
+    <h5>Description</h5>
+      <p>{{course.description}}</p>
+    </div>
+  </div>
+</main>
+{% endblock content %}

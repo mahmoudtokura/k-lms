@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Courses {% endblock title %}
+  {% block custom_css %}
+    <link href="{% static 'css/album.css' %}" rel="stylesheet">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+  {% endblock custom_css %}
+    <!-- Custom styles for this template -->
+  </head>
+<body>
+{% block content %}
+<main role="main">
+  <section class="jumbotron text-center all_course_banner">
+  <div class="">
+    <div class="container">
+      <h1>All Courses</h1>
+      <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+    </div>
+  </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        {% for course in course_list %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm" style="height: 420px;">
+          {% if course.thumbnail %}
+            <img class="course_thumbnail" src="{{course.thumbnail.url}}" />
+          {% else %}
+            <svg
+              class="bd-placeholder-img card-img-top" 
+              width="100%" height="225" 
+              xmlns="http://www.w3.org/2000/svg" 
+              preserveAspectRatio="xMidYMid slice" 
+              focusable="false" 
+              role="img" 
+              aria-label="Placeholder: Thumbnail">
+              <title>Placeholder</title>
+              <rect width="100%" height="100%" fill="#55595c"/>
+              <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+            </svg>
+          {% endif %}
+            <div class="ml-3 mt-1 mb-0">{{course.title}}</div>
+            <div class="card-body">
+              <h5>Description</h5>
+              <p class="card-text">{{course.description | truncatechars:50}}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a type="button" class="btn btn-sm btn-outline-secondary" href="{% url 'course' course.id%}">View</a>
+                  <a type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
+                </div>
+                <small class="text-muted">added by {{course.added_by.first_name}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock content %}
+
+
+</body>
+</html>
